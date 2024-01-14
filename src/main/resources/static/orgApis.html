@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>APIs</title>
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="js/smartcontract.js"></script>
+    <style>
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+    </style>
+</head>
+
+
+<body onload="showOrgAddress()">
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark pt-3">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="orgIndex.html">
+                        <img src="images/avatar.png" alt="Dispute Bills" style="width:50px;">
+                        <p style="font-size:40%" id="ethAddr">0xED880490B54Db7262A245445753e323aaa003e11</p>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='orgRating.html';">MyID rating</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='orgApis.html';">Colaboración</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='puntuarUser.html';">Rating de clientes</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='puntuarOrg.html';">Rating de organizaciones</a>
+                </li>
+                <li class="nav-item" style="margin-left:200px">
+                    <button class="button" onclick="cerrarSesion('org')">Cerrar sesión</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-3 p-3">
+        <br><br>
+        <img src="images/logo.png" alt="Dispute Bills" style="width:200px;">
+    </div>
+    <div class="col-sm-6 p-3">
+        <h3 class="display-5">Colaboración con otras entidades</h3><br>
+        <p>MyID colabora con entidades financieras españolas como la CIRBE, ASNEF, Hacienda y el Ministerio del Interior. Si tu organización cumple ciertos requisitos, podrás acceder a los datos de sus APIs.</p>
+    </div>
+    <div class="col-sm-3 p-3">
+        <br><br>
+        <img src="images/logo.png" alt="Dispute Bills" style="width:200px;">
+    </div>
+</div><br>
+
+<div>
+    
+    <!--CIRBE CHECK-->
+    <div class="row">
+        <div class="col-sm-3 p-3">
+            <br>
+            <a href="https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/relacionados/cirbe/">
+                <img src="images/cirbe-grande.png" alt="Dispute Bills" style="width:200px;">
+            </a>
+        </div>
+        <div class="col-sm-6 p-3">
+            <h4>Buscar a una persona en el CIRBE</h4><br>
+            <form>
+                <label for="userDNIc">DNI:</label><br>
+                <input type="text" class="form-control mt-3" id="userDNIc" name="userDNIc"><br>
+                <button class="button" onclick="searchCIRBE(document.getElementById('userDNIc').value,document.getElementById('cirbeuser'))">Buscar</button>
+            </form>
+            <p id="cirbeuser"></p>
+        </div>
+    </div>
+    <br>
+
+    <!--ASNEF CHECK-->
+    <div class="row">
+        <div class="col-sm-3 p-3">
+            <br>
+            <a href="https://asnef.com/">
+                <img src="images/asnef.png" alt="Dispute Bills" style="width:150px;">
+            </a>
+            <br>
+        </div>
+        <div class="col-sm-6 p-3">
+            <h4>Buscar a una persona en ASNEF</h4><br>
+            <form>
+                <label for="userDNIa">DNI:</label><br>
+                <input type="text" class="form-control mt-3" id="userDNIa" name="userDNIa"><br>
+                <button class="button" onclick="searchASNEF(document.getElementById('userDNIa').value,document.getElementById('asnefuser'))">Buscar</button>
+            </form>
+            <p id="asnefuser"></p>
+        </div>
+    </div>
+    <br>
+
+    <!--HACIENDA CHECK-->
+    <div class="row">
+        <div class="col-sm-3 p-3">
+            <br>
+            <br>
+            <a href="https://sede.agenciatributaria.gob.es/">
+                <img src="images/hacienda.png" alt="Dispute Bills" style="width:150px;">
+            </a>
+        </div>
+        <div class="col-sm-6 p-3">
+            <h4>Verificación de la declaración de la renta</h4><br>
+            <h5>API de Hacienda</h5><br>
+            <p>Busca la declaración de la renta más reciente por DNI y compara el documento subido por el cliente en el proceso KYC con el proporcionado por la API de Hacienda</p>
+            <form>
+                <label for="userDNIh">DNI:</label><br>
+                <input type="text" class="form-control mt-3" id="userDNIh" name="userDNIh"><br>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="upload" accept="application/pdf">
+                </form>
+                <button class="button" onclick="compareHacienda(document.getElementById('userDNIh').value,document.getElementById('hacienda'))">Buscar y comparar</button>
+            </form>
+            <p id="hacienda"></p>
+        </div>
+    </div>
+    <br>
+
+    <!--DNI CHECK-->
+    <div class="row">
+        <div class="col-sm-3 p-3">
+            <br><br>
+            <a href="https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/">
+                <img src="images/ministerio.jpg" alt="Dispute Bills" style="width:150px;">
+            </a>
+        </div>
+        <div class="col-sm-6 p-3">
+            <h4>Verificación del DNI de un cliente</h4><br>
+            <h5>API de DNIs del Ministerio del Interior</h5><br>
+            <p>Busca el DNI y compara el documento subido por el cliente con el proporcionado por la API</p>
+            <form>
+                <label for="userDNIm">DNI:</label><br>
+                <input type="text" class="form-control mt-3" id="userDNIm" name="userDNIm"><br>
+                <form id="uploadDni" enctype="multipart/form-data">
+                    <input type="file" id="dniInputm" name="upload" accept="application/pdf">
+                </form>
+                <button class="button" onclick="compareDNI(document.getElementById('userDNIm').value,document.getElementById('dnires'))">Buscar y comparar</button>
+            </form>
+            <p id="dnires" style="color:red;"></p>
+        </div>
+    </div>
+    <br>
+    
+</div>
+<br>
+    <footer class="text-center" style="background-color: #87bfd8">
+        <section>
+            <h3 class="display-6" style="color: black">Contacta con nosotros</h3>
+        </section>
+        <section>
+            <a style="color: black" href="mailto:admin@myid.com">admin@myid.com</a>
+        </section><br>
+    </footer>
+</body>
+</html>

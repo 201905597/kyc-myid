@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KYC</title>
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="js/smartcontract.js"></script>
+    <style>
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .rating-bar {
+            width: 200px;
+            height: 20px;
+            background-color: lightgray;
+        }
+        .rating-bar-fill {
+            height: 100%;
+            background-color: dodgerblue;
+        }
+        .rating-stars {
+            font-size: 20px;
+            color: gold;
+        }
+    </style>
+</head>
+
+
+<body onload="showOrgAddress()">
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark pt-3">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="orgIndex.html">
+                        <img src="images/avatar.png" alt="Dispute Bills" style="width:50px;">
+                        <p style="font-size:40%" id="ethAddr">0xED880490B54Db7262A245445753e323aaa003e11</p>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='orgRating.html';">MyID rating</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='orgApis.html';">Colaboración</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='puntuarUser.html';">Rating de clientes</a>
+                </li>
+                <li class="nav-item" style="margin-left:70px">
+                    <a class="nav-link" onclick="window.location.href='puntuarOrg.html';">Rating de organizaciones</a>
+                </li>
+                <li class="nav-item" style="margin-left:200px">
+                    <button class="button" onclick="cerrarSesion('org')">Cerrar sesión</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-3 p-3">
+        <br><br>
+        <img src="images/score.jpg" alt="Dispute Bills" style="width:150px;">
+    </div>
+    <div class="col-sm-6 p-3">
+        <h3 class="display-6">Haz más fiable MyID</h3><br>
+        <p>En esta sección puedes votar a otras organizaciones si consideras que son fiables. Así MyID será más transparente y seguro.</p>
+    </div>
+    <div class="col-sm-3 p-3">
+        <br><br>
+        <img src="images/score.jpg" alt="Dispute Bills" style="width:150px;">
+    </div>
+</div><br>
+
+<div class="container-fluid" style="background-color:#87bfd8" align="center">
+    <p> </p><br>
+    <h2>Puntuar organizaciones</h2>
+    <p> </p><br>
+</div>
+<br>
+<div class="row">
+    
+    <div class="col">
+        <h4 align="center" id="myidrating">Aumenta el rating de una organización</h4>
+        <form align="center">
+            <label for="orgAddress">Address de la organización:</label><br>
+            <input type="text" class="form-control mt-3" id="orgAddress" name="orgAddress" style="width: 500px; margin-left:100px"><br>
+            <button class="button" onclick="voteOrg(document.getElementById('orgAddress').value)">Votar</button>
+        </form>  
+    </div>
+    <div class="col">
+        <img src="images/documentos.png" alt="Dispute Bills" style="width:150px;">
+    </div>
+    
+</div>
+
+<br>
+    <footer class="text-center" style="background-color: #87bfd8">
+        <section>
+            <h3 class="display-6" style="color: black">Contacta con nosotros</h3>
+        </section>
+        <section>
+            <a style="color: black" href="mailto:admin@myid.com">admin@myid.com</a>
+        </section><br>
+    </footer>
+</body>
+</html>
